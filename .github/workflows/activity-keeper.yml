@@ -1,0 +1,52 @@
+name: Auto Activity & Green Graph Keeper
+
+on:
+  schedule:
+    # Runs 2 to 3 times a day at different times to keep activity natural and green
+    - cron: '15 4 * * *'    # 04:15 UTC (~07:45 Iran)
+    - cron: '40 12 * * *'   # 12:40 UTC (~16:10 Iran)
+    - cron: '20 19 * * *'   # 19:20 UTC (~22:50 Iran)
+  workflow_dispatch:        # Allows manual trigger anytime
+
+permissions:
+  contents: write
+
+jobs:
+  keep-green:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Update Activity & Pulse Logs
+        run: |
+          python scripts/pulse.py
+
+      - name: Commit and Push Changes
+        run: |
+          git config --local user.name "soheyl"
+          git config --local user.email "aioxtera01@gmail.com"
+          git add -A
+          if git diff --staged --quiet; then
+            echo "No changes to commit."
+          else
+            # Random natural commit messages
+            MESSAGES=(
+              "chore(metrics): update daily uptime and system pulse"
+              "docs(activity): refresh automated telemetry logs"
+              "chore(pulse): sync automated telemetry data"
+              "chore(metrics): periodic heartbeat sync"
+              "docs(stats): update system runtime activity record"
+              "chore(telemetry): log automated node status"
+            )
+            RANDOM_MSG=${MESSAGES[$RANDOM % ${#MESSAGES[@]}]}
+            git commit -m "$RANDOM_MSG [skip ci]"
+            git push origin main
+          fi
