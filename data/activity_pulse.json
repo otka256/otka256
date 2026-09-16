@@ -1,15 +1,10 @@
 {
-  "last_updated_utc": "2026-09-16T09:17:06.228937+00:00",
+  "last_updated_utc": "2026-09-16T17:16:29.566631+00:00",
   "status": "ONLINE",
   "node": "ABSOLUTE-01",
   "environment": "Null.Simulation.-01",
-  "pulse_count": 101,
+  "pulse_count": 102,
   "history": [
-    {
-      "timestamp": "2026-08-14T11:46:15.557762+00:00",
-      "heartbeat_id": "hb_148531",
-      "metric_score": 99.34
-    },
     {
       "timestamp": "2026-08-14T11:46:40.830695+00:00",
       "heartbeat_id": "hb_930850",
@@ -504,6 +499,11 @@
       "timestamp": "2026-09-16T09:17:06.228937+00:00",
       "heartbeat_id": "hb_996498",
       "metric_score": 99.38
+    },
+    {
+      "timestamp": "2026-09-16T17:16:29.566631+00:00",
+      "heartbeat_id": "hb_740106",
+      "metric_score": 99.69
     }
   ]
 }
